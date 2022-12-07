@@ -9,7 +9,7 @@ class StudentsController < ApplicationController
 
     def show
         @student = Student.find(params[:id])
-        render json: @student
+        render json: @student.to_json(only: [:firstname, :lastname, :id], include: [:instructors])
     end
 
     def create
@@ -25,7 +25,7 @@ class StudentsController < ApplicationController
         student = Student.find_by(params[:id])
         student.update!(student_params)
         render json: student, status: :accepted
-    end
+    endz
 
     def destroy
         student = Student.find(params[:id])
